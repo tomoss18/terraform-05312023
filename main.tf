@@ -25,10 +25,10 @@ resource "aws_subnet" "pubsub1" {
 }
 
 resource "aws_subnet" "pubsub2" {
-  vpc_id                          = aws_vpc.main.id
-  cidr_block                      = "10.0.1.0/24"
-  availability_zone               = "us-east-1b"
-  map_customer_owned_ip_on_launch = true
+  vpc_id                  = aws_vpc.main.id
+  cidr_block              = "10.0.1.0/24"
+  availability_zone       = "us-east-1b"
+  map_public_ip_on_launch = true
   tags = {
     Name = "tlopez-pubsub2"
     env  = "Dev"
@@ -49,7 +49,12 @@ resource "aws_route" "public" {
   gateway_id             = aws_internet_gateway.main.id
 }
 
-resource "aws_route_table_association" "public" {
+resource "aws_route_table_association" "public1" {
   route_table_id = aws_route_table.public.id
-  subnet_id = [aws_subtnet.pubsub1.id, aws_subnet.pubsub2.id]
+  subnet_id      = aws_subtnet.pubsub1.id
+}
+
+resource "aws_route_table_association" "public2" {
+  route_table_id = aws_route_table.public.id
+  subnet_id      = aws_subtnet.pubsub2.id
 }
