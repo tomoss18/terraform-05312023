@@ -17,7 +17,7 @@ resource "aws_subnet" "pubsub1" {
   vpc_id                          = aws_vpc.main.id
   cidr_block                      = "10.0.0.0/24"
   availability_zone               = "us-east-1a"
-  map_customer_owned_ip_on_launch = true
+  map_public_ip_on_launch = true
   tags = {
     Name = "tlopez-pubsub1"
     env  = "Dev"
