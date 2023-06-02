@@ -5,6 +5,14 @@ terraform {
       version = "5.0.1"
     }
   }
+
+
+  backend "s3" {
+    bucket  = "tlopez-terraform-pract"
+    key     = "demo.tfstate"
+    region  = "us-east-1"
+    profile = "luffy"
+  }
 }
 
 provider "aws" {
